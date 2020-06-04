@@ -1,0 +1,6 @@
+{
+	"http_addr" : ":8894",
+	"debug": true,
+	"path":"c:/",
+	"version": "v0.0.1"
+}

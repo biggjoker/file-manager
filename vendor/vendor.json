@@ -1,0 +1,147 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "qlEzrgKgIkh7y0ePm9BNo1cNdXo=",
+			"path": "github.com/gin-contrib/sse",
+			"revision": "54d8467d122d380a14768b6b4e5cd7ca4755938f",
+			"revisionTime": "2019-06-02T15:02:53Z"
+		},
+		{
+			"checksumSHA1": "90S9sFqcIo/uuwQzz1t/wYs7GEs=",
+			"path": "github.com/gin-gonic/gin",
+			"revision": "b869fe1415e4b9eb52f247441830d502aece2d4d",
+			"revisionTime": "2018-08-14T08:58:52Z",
+			"version": "v1.3",
+			"versionExact": "v1.3.0"
+		},
+		{
+			"checksumSHA1": "BjShmaQTKI8+411rCb7LFqJkLA0=",
+			"path": "github.com/gin-gonic/gin/binding",
+			"revision": "b869fe1415e4b9eb52f247441830d502aece2d4d",
+			"revisionTime": "2018-08-14T08:58:52Z",
+			"version": "v1.3",
+			"versionExact": "v1.3.0"
+		},
+		{
+			"checksumSHA1": "woO1qIxIeQ1bcbPSiMfAKk3r4xg=",
+			"path": "github.com/gin-gonic/gin/json",
+			"revision": "b869fe1415e4b9eb52f247441830d502aece2d4d",
+			"revisionTime": "2018-08-14T08:58:52Z",
+			"version": "v1.3",
+			"versionExact": "v1.3.0"
+		},
+		{
+			"checksumSHA1": "f1n8P2YAi3o+X0//dkoDJ822zW0=",
+			"path": "github.com/gin-gonic/gin/render",
+			"revision": "b869fe1415e4b9eb52f247441830d502aece2d4d",
+			"revisionTime": "2018-08-14T08:58:52Z",
+			"version": "v1.3",
+			"versionExact": "v1.3.0"
+		},
+		{
+			"checksumSHA1": "Ajh8TemnItg4nn+jKmVcsMRALBc=",
+			"path": "github.com/json-iterator/go",
+			"revision": "36b14963da70d11297d313183d7e6388c8510e1e",
+			"revisionTime": "2017-08-29T15:58:51Z"
+		},
+		{
+			"checksumSHA1": "+tOBsk5zjDzoQqj6eJcDZZFKesU=",
+			"path": "github.com/lestrrat-go/file-rotatelogs",
+			"revision": "3b4f34a036f374c18d604e1b8006d9fbb9593c06",
+			"revisionTime": "2018-06-02T11:03:08Z"
+		},
+		{
+			"checksumSHA1": "U6lX43KDDlNOn+Z0Yyww+ZzHfFo=",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "57fdcb988a5c543893cc61bce354a6e24ab70022",
+			"revisionTime": "2017-03-07T16:30:44Z"
+		},
+		{
+			"checksumSHA1": "ljd3FhYRJ91cLZz3wsH9BQQ2JbA=",
+			"path": "github.com/pkg/errors",
+			"revision": "816c9085562cd7ee03e7f8188a1cfd942858cded",
+			"revisionTime": "2018-03-11T21:45:15Z"
+		},
+		{
+			"checksumSHA1": "CoxdaTYdPZNJXr8mJfLxye428N0=",
+			"path": "github.com/ugorji/go/codec",
+			"revision": "c88ee250d0221a57af388746f5cf03768c21d6e2",
+			"revisionTime": "2017-02-15T20:11:44Z"
+		},
+		{
+			"checksumSHA1": "XgwEl14OC8l4lp9gSCURkc7iMEU=",
+			"path": "github.com/xuguruogu/go-salt/cmd",
+			"revision": "551de499c15a8dd5b1ab51fe7439bf92b603255d",
+			"revisionTime": "2016-10-28T13:52:52Z"
+		},
+		{
+			"checksumSHA1": "0zu2FS8IXNQSrJKjn5eb9VgTq1E=",
+			"path": "go.uber.org/atomic",
+			"revision": "ef0d20d85b01f4708a8085bca571838bf59a3f77",
+			"revisionTime": "2019-07-31T19:47:37Z"
+		},
+		{
+			"checksumSHA1": "yMjpW1E37IpyxqZl+Cv2zHE0I0U=",
+			"path": "go.uber.org/multierr",
+			"revision": "bd075f90b08f5274a0bc63bcffacd6c64b60ac55",
+			"revisionTime": "2019-04-29T21:01:00Z"
+		},
+		{
+			"checksumSHA1": "0/OIshmoBSMErrRjCTDJUzit6aw=",
+			"path": "go.uber.org/zap",
+			"revision": "9a9fa7d4b5f07a9b634983678a65b5525f81e58b",
+			"revisionTime": "2019-07-09T14:27:28Z"
+		},
+		{
+			"checksumSHA1": "afFbYQlWVvMANwhNqMazS3uM0Dc=",
+			"path": "go.uber.org/zap/buffer",
+			"revision": "9a9fa7d4b5f07a9b634983678a65b5525f81e58b",
+			"revisionTime": "2019-07-09T14:27:28Z"
+		},
+		{
+			"checksumSHA1": "Y0uE8U8wxuPku0bFZyVmYLznd/o=",
+			"path": "go.uber.org/zap/internal/bufferpool",
+			"revision": "9a9fa7d4b5f07a9b634983678a65b5525f81e58b",
+			"revisionTime": "2019-07-09T14:27:28Z"
+		},
+		{
+			"checksumSHA1": "AA/i5mzFuQBeFcE+d9ZBLPropjU=",
+			"path": "go.uber.org/zap/internal/color",
+			"revision": "9a9fa7d4b5f07a9b634983678a65b5525f81e58b",
+			"revisionTime": "2019-07-09T14:27:28Z"
+		},
+		{
+			"checksumSHA1": "fjEB1pcePOWjEmayG54E92JYgWk=",
+			"path": "go.uber.org/zap/internal/exit",
+			"revision": "9a9fa7d4b5f07a9b634983678a65b5525f81e58b",
+			"revisionTime": "2019-07-09T14:27:28Z"
+		},
+		{
+			"checksumSHA1": "kwv/0J6U9apaI9CGZXDlAbhcIHk=",
+			"path": "go.uber.org/zap/zapcore",
+			"revision": "9a9fa7d4b5f07a9b634983678a65b5525f81e58b",
+			"revisionTime": "2019-07-09T14:27:28Z"
+		},
+		{
+			"checksumSHA1": "2YeDxLpLYDkQqqIjKjigC3QdGNY=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "7c87d13f8e835d2fb3a70a2912c811ed0c1d241b",
+			"revisionTime": "2018-05-14T07:31:37Z"
+		},
+		{
+			"checksumSHA1": "39V1idWER42Lmcmg2Uy40wMzOlo=",
+			"path": "gopkg.in/go-playground/validator.v8",
+			"revision": "5f57d2222ad794d0dffb07e664ea05e2ee07d60c",
+			"revisionTime": "2016-07-18T13:41:25Z"
+		},
+		{
+			"checksumSHA1": "12GqsW8PiRPnezDDy0v4brZrndM=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "a5b47d31c556af34a302ce5d659e6fea44d90de0",
+			"revisionTime": "2016-09-28T15:37:09Z"
+		}
+	],
+	"rootPath": "github.com/sunlands/file-manager"
+}
