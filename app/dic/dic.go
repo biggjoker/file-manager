@@ -2,48 +2,41 @@ package dic
 
 import (
 	"errors"
+	"github.com/biggjoker/file-manager/filehander"
 	"io/ioutil"
 	"net/http"
 	"os"
-	"strings"
 
 	"github.com/biggjoker/file-manager/app/helper"
-	"github.com/biggjoker/file-manager/protocol"
 	"github.com/biggjoker/file-manager/g"
+	"github.com/biggjoker/file-manager/protocol"
 	"github.com/biggjoker/file-manager/zlog"
 	"github.com/gin-gonic/gin"
 )
 
 func GetDic(c *gin.Context) {
-	path := g.Config().BaseDir
-	if pathAdd, ok := c.GetQuery("path"); ok && pathAdd != "" {
-		path +=  pathAdd
+	path, ok := c.GetQuery("path")
+	if !ok {
+		helper.JSONR(c, http.StatusBadRequest, "path no exit")
+		zlog.Errorw("get dir faile", "dir", path)
+		return
 	}
-	fileSlice := getCurrentChildFiles(path)
 
-	for _, v := range fileSlice {
-		v.Name = strings.TrimPrefix(v.Name, g.Config().BaseDir)
+	f, err := filehander.NewFounder(path)
+	if err != nil {
+		helper.JSONR(c, http.StatusInternalServerError, err)
+		zlog.Errorw("get dir faile", "dir", path, "err", err)
+		return
 	}
+
+	fileSlice, err := f.GetChilds()
+	if err != nil {
+		helper.JSONR(c, http.StatusInternalServerError, err)
+		zlog.Errorw("get dir faile", "dir", path, "err", err)
+		return
+	}
+
 	helper.JSONR(c, fileSlice)
-}
-
-func getCurrentChildFiles(dirpath string) (fileSlices []*protocol.FileInfo) {
-	fileSlices = make([]*protocol.FileInfo, 0, 10)
-	files, _ := ioutil.ReadDir(dirpath)
-	for _, f := range files {
-		fileInfo := &protocol.FileInfo{
-			Name:  dirpath + "/" + f.Name(),
-			IsDir: f.IsDir(),
-			Size: f.Size(),
-		}
-		fileSlices = append(fileSlices, fileInfo)
-	}
-	return fileSlices
-}
-
-func getFullPath(file string) string {
-	file = strings.TrimPrefix(file, "./")
-	return g.Config().BaseDir + file
 }
 
 func CreateDir(c *gin.Context) {
@@ -52,12 +45,13 @@ func CreateDir(c *gin.Context) {
 		helper.JSONR(c, http.StatusBadRequest, helper.INPUT_FORMATE_ERROR)
 		return
 	}
-	path := getFullPath(req.Path)
-	println(path)
-	if err := os.MkdirAll(getFullPath(req.Path), 0755); err != nil {
+	_, err := filehander.CreateFounder(req.Path)
+	if err != nil {
 		helper.JSONR(c, http.StatusInternalServerError, err)
+		zlog.Errorw("create dir faile", "dir", req.Path, "err", err)
 		return
 	}
+
 	helper.JSONR(c, "create dir success!")
 }
 
@@ -68,21 +62,23 @@ func DeleteDir(c *gin.Context) {
 	}{}
 	if err := c.Bind(&req); err != nil {
 		helper.JSONR(c, http.StatusBadRequest, helper.INPUT_FORMATE_ERROR)
-		return
-	}
-	force := strings.ToLower(req.force)
-
-	var err error
-	if force == "TRUE" {
-		err = os.RemoveAll(getFullPath(req.DeletePath))
-	} else {
-		err = os.Remove(getFullPath(req.DeletePath))
-	}
-	if err != nil {
 		zlog.Errorw("delete dir faile", "dir", req.DeletePath, "err", err)
-		helper.JSONR(c, http.StatusInternalServerError, err)
 		return
 	}
+
+	f, err := filehander.NewFounder(req.DeletePath)
+	if err != nil {
+		helper.JSONR(c, http.StatusInternalServerError, err)
+		zlog.Errorw("delete dir faile", "dir", req.DeletePath, "err", err)
+		return
+	}
+
+	if err := f.Delete(req.force == "TRUE"); err != nil {
+		helper.JSONR(c, http.StatusInternalServerError, err)
+		zlog.Errorw("delete dir faile", "dir", req.DeletePath, "err", err)
+		return
+	}
+
 	helper.JSONR(c, "delete dir success!")
 }
 
@@ -90,15 +86,23 @@ func RenameDir(c *gin.Context) {
 	var req protocol.RenameReq
 	if err := c.Bind(&req); err != nil {
 		helper.JSONR(c, http.StatusBadRequest, helper.INPUT_FORMATE_ERROR)
+		zlog.Errorw("rename dir faile", "dir", req.New, "err", err)
 		return
 	}
 
-	err := os.Rename(getFullPath(req.Old), getFullPath(req.New))
+	f, err := filehander.NewFounder(req.Old)
 	if err != nil {
-		zlog.Errorw("rename faile", "old", req.Old, "new", req.New, "err", err)
 		helper.JSONR(c, http.StatusInternalServerError, err)
+		zlog.Errorw("rename dir faile", "dir", req.New, "err", err)
 		return
 	}
+
+	if err := f.Rename(req.New); err != nil {
+		helper.JSONR(c, http.StatusInternalServerError, err)
+		zlog.Errorw("rename dir faile", "dir", req.New, "err", err)
+		return
+	}
+
 	helper.JSONR(c, "rename success!")
 }
 
