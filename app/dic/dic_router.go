@@ -10,11 +10,11 @@ func Routes(r gin.IRouter) {
 	dicapi.DELETE("/dir", DeleteDir)
 	dicapi.PUT("/dir", RenameDir)
 
-
 	dicapi.GET("/file", ReadFile)
-	dicapi.POST("/file", SaveFile)
+	dicapi.POST("/file", CreateFile)
 	dicapi.DELETE("/file", DeleteFile)
-	dicapi.PUT("/file", RenameFile)
+	dicapi.PUT("/file", SaveFile)
+	dicapi.POST("/renamefile", RenameFile)
 
-	dicapi.POST("/upfile",Upload)
+	dicapi.POST("/upfile", Upload)
 }

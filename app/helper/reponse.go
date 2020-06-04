@@ -9,7 +9,6 @@ import (
 )
 
 const INPUT_FORMATE_ERROR string = "the input formate is wrong!!"
-const INPUT_FILE_NO_PERMISSION string = "the input cannot be visit"
 
 type RespJson struct {
 	RetCode int         `json:"code"`

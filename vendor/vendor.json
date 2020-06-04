@@ -71,12 +71,6 @@
 			"revisionTime": "2017-02-15T20:11:44Z"
 		},
 		{
-			"checksumSHA1": "XgwEl14OC8l4lp9gSCURkc7iMEU=",
-			"path": "github.com/xuguruogu/go-salt/cmd",
-			"revision": "551de499c15a8dd5b1ab51fe7439bf92b603255d",
-			"revisionTime": "2016-10-28T13:52:52Z"
-		},
-		{
 			"checksumSHA1": "0zu2FS8IXNQSrJKjn5eb9VgTq1E=",
 			"path": "go.uber.org/atomic",
 			"revision": "ef0d20d85b01f4708a8085bca571838bf59a3f77",
@@ -143,5 +137,5 @@
 			"revisionTime": "2016-09-28T15:37:09Z"
 		}
 	],
-	"rootPath": "github.com/sunlands/file-manager"
+	"rootPath": "github.com/biggjoker/file-manager"
 }

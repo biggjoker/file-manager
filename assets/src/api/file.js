@@ -58,6 +58,17 @@ export function readFile(name) {
 export function saveFile(name, content) {
   return request({
     url: '/dir/file',
+    method: 'put',
+    data: {
+      name,
+      content
+    }
+  })
+}
+
+export function createFile(name, content) {
+  return request({
+    url: '/dir/file',
     method: 'post',
     data: {
       name,

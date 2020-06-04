@@ -8,6 +8,8 @@ import (
 	"os"
 )
 
+var DEF_DIC_MODE  = os.FileMode(0755)
+
 type Founder struct {
 	Path string
 }
@@ -30,7 +32,7 @@ func CreateFounder(path string) (*Founder,error) {
 	if os.IsExist(err) {
 		return nil ,fmt.Errorf("path exit")
 	}
-	if err := os.MkdirAll(fullPath, 0755); err != nil {
+	if err := os.MkdirAll(fullPath, DEF_DIC_MODE); err != nil {
 		return nil ,fmt.Errorf("create file")
 	}
 	return &Founder{Path: path},nil
