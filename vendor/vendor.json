@@ -41,6 +41,12 @@
 			"versionExact": "v1.3.0"
 		},
 		{
+			"checksumSHA1": "qlPUeFabwF4RKAOF1H+yBFU1Veg=",
+			"path": "github.com/golang/protobuf/proto",
+			"revision": "5a0f697c9ed9d68fef0116532c6e05cfeae00e55",
+			"revisionTime": "2017-06-01T23:02:30Z"
+		},
+		{
 			"checksumSHA1": "Ajh8TemnItg4nn+jKmVcsMRALBc=",
 			"path": "github.com/json-iterator/go",
 			"revision": "36b14963da70d11297d313183d7e6388c8510e1e",
@@ -69,6 +75,12 @@
 			"path": "github.com/ugorji/go/codec",
 			"revision": "c88ee250d0221a57af388746f5cf03768c21d6e2",
 			"revisionTime": "2017-02-15T20:11:44Z"
+		},
+		{
+			"checksumSHA1": "uVYuusr+u6mBv452+WZJ6PHQLtM=",
+			"path": "github.com/xuguruogu/gorest",
+			"revision": "90aadd13041795409d2f66867a407b143386f5dd",
+			"revisionTime": "2016-11-04T06:13:11Z"
 		},
 		{
 			"checksumSHA1": "0zu2FS8IXNQSrJKjn5eb9VgTq1E=",
