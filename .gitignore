@@ -1,0 +1,6 @@
+logs/
+dev_start.sh
+nohup.out
+auto_publish
+scp_pkg.sh
+.idea
