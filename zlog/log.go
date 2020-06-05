@@ -50,7 +50,7 @@ func InitLog(debug bool) io.Writer {
 }
 
 func getFilePath() string {
-	logfile := getCurrentDirectory() + "/logs/" + getAppname() + ".log"
+	logfile := getCurrentDirectory() + "/" + getAppname() + ".log"
 	return logfile
 }
 

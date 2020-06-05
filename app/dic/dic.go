@@ -18,9 +18,7 @@ var (
 func GetDic(c *gin.Context) {
 	path, ok := c.GetQuery("path")
 	if !ok {
-		helper.JSONR(c, http.StatusBadRequest, "path no exit")
-		zlog.Errorw("get dir faile", "dir", path)
-		return
+		path = ""
 	}
 
 	f, err := filehander.NewFounder(path)
@@ -121,7 +119,7 @@ func ReadFile(c *gin.Context) {
 		return
 	}
 
-	content,err := f.ReadFile()
+	content, err := f.ReadFile()
 	if err != nil {
 		helper.JSONR(c, http.StatusInternalServerError, err)
 		zlog.Errorw("read file failed", "dir", path, "err", err)
@@ -162,7 +160,7 @@ func CreateFile(c *gin.Context) {
 		return
 	}
 
-	_, err := filehander.CreateFile(req.Name,req.Content)
+	_, err := filehander.CreateFile(req.Name, req.Content)
 	if err != nil {
 		helper.JSONR(c, http.StatusInternalServerError, err)
 		zlog.Errorw("save file failed", "dir", req.Name, "err", err)

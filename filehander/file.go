@@ -11,8 +11,9 @@ import (
 	"mime/multipart"
 	"os"
 )
+
 //读写权限
-var DEF_FILE_MODE  = os.FileMode(0644)
+var DEF_FILE_MODE = os.FileMode(0644)
 
 type File struct {
 	Path string
@@ -21,50 +22,49 @@ type File struct {
 func NewFile(path string) (*File, error) {
 	fullPath := g.GetFullPath(path)
 	stat, err := os.Stat(fullPath)
-	if err == nil ||
-		os.IsExist(err) ||
-		stat.IsDir() {
+	if err != nil {
 		return nil, fmt.Errorf("path error")
 	}
-	return &File{Path: path}, nil
+
+	if stat.IsDir() {
+		return nil, fmt.Errorf("path error")
+	}
+
+	return &File{Path: fullPath}, nil
 }
 
 func CreateFile(path, content string) (*File, error) {
 	fullPath := g.GetFullPath(path)
 	_, err := os.Stat(fullPath)
-	if err == nil {
+	if err != nil {
 		return nil, fmt.Errorf("error")
-	}
-	if os.IsExist(err) {
-		return nil, fmt.Errorf("path exit")
 	}
 	if err := ioutil.WriteFile(fullPath, []byte(content), DEF_FILE_MODE); err != nil {
 		return nil, fmt.Errorf("create file")
 	}
-	return &File{Path: path}, nil
+	return &File{Path: fullPath}, nil
 }
 
 func DeleteFile(path string) error {
 	fullPath := g.GetFullPath(path)
-	return  os.Remove(fullPath)
+	return os.Remove(fullPath)
 }
 
-func (f *File)ReadFile()([]byte,error) {
+func (f *File) ReadFile() ([]byte, error) {
 	return ioutil.ReadFile(f.Path)
 }
 
-func (f *File)SaveFile(content []byte) error {
+func (f *File) SaveFile(content []byte) error {
 	return ioutil.WriteFile(f.Path, []byte(content), DEF_FILE_MODE)
 }
 
-func (f *File)RenameFile(newPath string) error {
+func (f *File) RenameFile(newPath string) error {
 	err := os.Rename(f.Path, g.GetFullPath(newPath))
-	if err !=nil {
-		f.Path = newPath
+	if err == nil {
+		f.Path = g.GetFullPath(newPath)
 	}
 	return err
 }
-
 
 func SaveUploadedFile(file *multipart.FileHeader, dst string) error {
 	src, err := file.Open()

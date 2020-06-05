@@ -15,7 +15,7 @@ func GetFullPath(path string) string {
 
 func GetRelativePath(path string) string {
 	if len(path) <= len(Config().BaseDir) {
-		return "/"
+		return ""
 	}
 	return path[len(Config().BaseDir):]
 }

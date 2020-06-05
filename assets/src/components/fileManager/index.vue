@@ -11,7 +11,7 @@
           :multiple="true"
           name="file"
           :auto-upload="true"
-          action="/file-manager/dic/upfile"
+          action="/file-manager/dir/upfile"
           :file-list="fileList">
           <el-button size="small" type="primary">点击上传</el-button>
         </el-upload>

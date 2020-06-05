@@ -43,5 +43,6 @@ func main() {
 	app.Routes(routes)
 	go routes.Run(g.Config().HttpAddr)
 
+	zlog.Info("process start")
 	startSignal(os.Getpid())
 }
