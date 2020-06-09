@@ -2,12 +2,14 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"github.com/biggjoker/file-manager/app"
 	"github.com/biggjoker/file-manager/g"
+	"github.com/biggjoker/file-manager/redis"
 	"github.com/biggjoker/file-manager/zlog"
 	"github.com/gin-gonic/gin"
 )
@@ -44,5 +46,9 @@ func main() {
 	go routes.Run(g.Config().HttpAddr)
 
 	zlog.Info("process start")
+
+	redis.InitRedisClient("192.168.0.48:15620","123456")
+	fmt.Println(redis.GetKeys("qwe"))
+
 	startSignal(os.Getpid())
 }
