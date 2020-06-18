@@ -1,13 +1,16 @@
 package main
 
 import (
+	"bufio"
 	"flag"
+	"fmt"
 	"github.com/biggjoker/file-manager/app"
 	"github.com/biggjoker/file-manager/g"
-	"github.com/biggjoker/file-manager/ws"
 	"github.com/biggjoker/file-manager/zlog"
 	"github.com/gin-gonic/gin"
+	"log"
 	"os"
+	"os/exec"
 	"os/signal"
 	"syscall"
 )
@@ -34,7 +37,24 @@ func main() {
 	g.ParseConfig(*cfg)
 	out := zlog.InitLog(g.Config().Debug)
 
-	ws.CreateWs()
+	cmd := exec.Command("cmd.exe","echo","11111")
+	stdout, err := cmd.StdoutPipe()
+	if  err != nil {
+		log.Fatal(err)
+	}
+	if err := cmd.Start(); err != nil {
+		log.Fatal(err)
+	}
+	reader := bufio.NewReader(stdout)
+
+	line,err :=reader.ReadString('\n')
+	for err == nil {
+		fmt.Println(line)
+		line,err =reader.ReadString('\n')
+	}
+
+
+	//ws.CreateWs()
 
 	gin.DefaultWriter = out
 	gin.DefaultErrorWriter = out
@@ -44,7 +64,6 @@ func main() {
 
 	app.Routes(routes)
 	go routes.Run(g.Config().HttpAddr)
-
 	zlog.Info("process start")
 
 	startSignal(os.Getpid())

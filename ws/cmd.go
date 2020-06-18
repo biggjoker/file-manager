@@ -1,6 +1,8 @@
 package ws
 
 import (
+	"bytes"
+	"fmt"
 	"github.com/biggjoker/file-manager/zlog"
 	"github.com/gorilla/websocket"
 	"log"
@@ -22,27 +24,29 @@ func ExecCmd(w http.ResponseWriter, r *http.Request) {
 	}
 
 	defer ws.Close()
-	cmd := exec.Command("cmd.exe")
 
+	var outInfo bytes.Buffer
 	// todo timeout handle
 	for {
 
 
 		messageType, p, err := ws.ReadMessage()
+		fmt.Println(p)
 		if err != nil {
 			zlog.Error("ws error", err)
 			return
 		}
-		cmd.Stdin.Read(p)
+
+		cmd := exec.Command("cmd.exe","echo","11111")
+		cmd.Stdout = &outInfo
 		err = cmd.Run()
-		out, err := cmd.Output()
 
 		if err != nil {
 			zlog.Error("ws error", err)
 			return
 		}
-		if err != nil {
-			if err := ws.WriteMessage(messageType, out); err != nil {
+		if err == nil {
+			if err := ws.WriteMessage(messageType, outInfo.Bytes()); err != nil {
 				zlog.Error("ws error", err)
 				return
 			}
