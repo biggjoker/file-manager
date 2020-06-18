@@ -2,16 +2,14 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	"github.com/biggjoker/file-manager/app"
+	"github.com/biggjoker/file-manager/g"
+	"github.com/biggjoker/file-manager/ws"
+	"github.com/biggjoker/file-manager/zlog"
+	"github.com/gin-gonic/gin"
 	"os"
 	"os/signal"
 	"syscall"
-
-	"github.com/biggjoker/file-manager/app"
-	"github.com/biggjoker/file-manager/g"
-	"github.com/biggjoker/file-manager/redis"
-	"github.com/biggjoker/file-manager/zlog"
-	"github.com/gin-gonic/gin"
 )
 
 func startSignal(pid int) {
@@ -36,6 +34,8 @@ func main() {
 	g.ParseConfig(*cfg)
 	out := zlog.InitLog(g.Config().Debug)
 
+	ws.CreateWs()
+
 	gin.DefaultWriter = out
 	gin.DefaultErrorWriter = out
 	routes := gin.Default()
@@ -46,9 +46,6 @@ func main() {
 	go routes.Run(g.Config().HttpAddr)
 
 	zlog.Info("process start")
-
-	redis.InitRedisClient("192.168.0.48:15620","123456")
-	fmt.Println(redis.GetKeys("qwe"))
 
 	startSignal(os.Getpid())
 }

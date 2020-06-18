@@ -7,14 +7,12 @@ import (
 	"sync"
 )
 
-
-
 type GlobalConfig struct {
-
-	HttpAddr            string            `json:"http_addr"`
-	Debug               bool              `json:"debug"`
-	BaseDir             string            `json:"path"`
-	Version         	string            `json:"version"`
+	HttpAddr string `json:"http_addr"`
+	WsAddr   string `json:"ws_addr"`
+	Debug    bool   `json:"debug"`
+	BaseDir  string `json:"path"`
+	Version  string `json:"version"`
 }
 
 var (

@@ -9,14 +9,21 @@
         trigger="hover"
         width="160">
         <template>
-          <el-button type="primary"
-                     size="mini"
-                     @click="dealMenuFunc('rename')"
-                     icon="el-icon-edit"></el-button>
-          <el-button type="danger"
-                     size="mini"
-                     @click="dealMenuFunc('delete')"
-                     icon="el-icon-delete"></el-button>
+          <el-button-group>
+            <el-button type="primary"
+                       size="mini"
+                       @click="dealMenuFunc('rename')"
+                       icon="el-icon-edit"></el-button>
+            <el-button type="danger"
+                       size="mini"
+                       @click="dealMenuFunc('delete')"
+                       icon="el-icon-delete"></el-button>
+            <el-button type="info"
+                       size="mini"
+                       v-if="!info.is_dir"
+                       @click="dealMenuFunc('download')"
+                       icon="el-icon-download"></el-button>
+          </el-button-group>
         </template>
         <el-tag type="success"
                 slot="reference"
@@ -154,6 +161,8 @@
               })
             }).catch(() => {
           })
+        }else if (type === "download"){
+          window.open("/file-manager/dir/upfile?name="+this.info.name,"_blank")
         }
       },
       saveFileContent() {

@@ -17,4 +17,5 @@ func Routes(r gin.IRouter) {
 	dicapi.POST("/renamefile", RenameFile)
 
 	dicapi.POST("/upfile", Upload)
+	dicapi.GET("/upfile", Download)
 }

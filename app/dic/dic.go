@@ -1,6 +1,7 @@
 package dic
 
 import (
+	"fmt"
 	"github.com/biggjoker/file-manager/app/helper"
 	"github.com/biggjoker/file-manager/filehander"
 	"github.com/biggjoker/file-manager/g"
@@ -232,4 +233,33 @@ func Upload(c *gin.Context) {
 		zlog.Errorw("upload file", "dir", path, "err", err)
 	}
 	helper.JSONR(c, res)
+}
+
+func Download(c *gin.Context)  {
+	path, ok := c.GetQuery("name")
+	if !ok {
+		helper.JSONR(c, http.StatusBadRequest, helper.INPUT_FORMATE_ERROR)
+		return
+	}
+
+	f, err := filehander.NewFile(path)
+	if err != nil {
+		helper.JSONR(c, http.StatusInternalServerError, err)
+		zlog.Errorw("get dir faile", "dir", path, "err", err)
+		return
+	}
+	content, err := f.ReadFile()
+	if err != nil {
+		helper.JSONR(c, http.StatusInternalServerError, err)
+		zlog.Errorw("read file failed", "dir", path, "err", err)
+		return
+	}
+
+	name := g.GetPathFileName(path)
+	c.Writer.WriteHeader(http.StatusOK)
+	c.Header("Content-Disposition", "attachment; filename="+name)
+	c.Header("Content-Type", "application/text/plain")
+	c.Header("Accept-Length", fmt.Sprintf("%d", len(content)))
+	c.Writer.Write(content)
+	return
 }
