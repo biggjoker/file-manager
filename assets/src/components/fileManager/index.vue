@@ -19,6 +19,10 @@
                    type="primary"
                    @click="createDic">创建文件夹
         </el-button>
+        <el-button size="small"
+                   type="primary"
+                   @click="createConsole">控制台
+        </el-button>
         <!--<el-button size="small"-->
         <!--v-if="path === '/'"-->
         <!--type="primary">创建文本</el-button>-->
@@ -41,20 +45,29 @@
               :info="item">
       </folder>
     </div>
+    <console
+      :path="path"
+      ref="console">
+    </console>
   </el-card>
 </template>
 
 <script>
   import folder from "./components/folder"
-  import {getDic,
-  createDic} from "../../api/file"
+  import console from "../console"
+  import Vue from "vue"
+  import {
+    getDic,
+    createDic
+  } from "../../api/file"
   import ElButton from "element-ui/packages/button/src/button";
 
   export default {
     name: "index",
     components: {
       ElButton,
-      folder
+      folder,
+      console
     },
     data() {
       return {
@@ -86,18 +99,18 @@
           })
         }
       },
-      createDic(){
+      createDic() {
         this.$prompt('请输入名称', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-        }).then(({ value }) => {
+        }).then(({value}) => {
           let path = this.path
-          if(path === "/"){
+          if (path === "/") {
             path += value
-          }else {
-            path +=  "/" +value
+          } else {
+            path += "/" + value
           }
-          createDic(path).then(res =>{
+          createDic(path).then(res => {
             this.$message.success("创建成功")
             this.reloadTable()
           })
@@ -107,6 +120,9 @@
             message: '取消输入'
           })
         })
+      },
+      createConsole() {
+        Vue.set(this.$refs["console"],"visible", true)
       }
     },
     mounted() {
@@ -120,7 +136,7 @@
           }
           let head = t.name.slice(0, this.path.length)
           let tail = t.name.slice(this.path.length)
-          if(this.path === "/"){
+          if (this.path === "/") {
             tail = "/" + tail
           }
 
